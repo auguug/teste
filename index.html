@@ -168,6 +168,9 @@
             --white: #FFFFFF;
             --font-heading: 'Playfair Display', serif;
             --font-body: 'Inter', sans-serif;
+            --bg-light: #EFECE7;
+            --text-secondary: #555;
+            --text-muted: #666;
         }
 
         * {
@@ -333,6 +336,9 @@
             display: block;
             cursor: pointer;
             z-index: 1001;
+            background: none;
+            border: none;
+            padding: 0;
         }
 
         .hamburger div {
@@ -624,6 +630,21 @@
             margin-bottom: 2.5rem;
             max-width: 680px;
             line-height: 1.2;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        }
+
+        .text-center {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* ÁREAS DE ATUAÇÃO */
@@ -679,7 +700,7 @@
         }
 
         .area-desc {
-            color: #555;
+            color: var(--text-secondary);
             font-size: 1rem;
             line-height: 1.65;
             transition: all 0.4s ease;
@@ -719,7 +740,7 @@
         .sobre-text p {
             margin-bottom: 1.5rem;
             font-size: 1rem;
-            color: #333;
+            color: var(--text-secondary);
         }
 
         .sobre-stats {
@@ -731,6 +752,13 @@
         .stat-item {
             display: flex;
             flex-direction: column;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--subtle-color);
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
         }
 
         .stat-number {
@@ -746,7 +774,7 @@
             font-size: 0.82rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: #666;
+            color: var(--text-muted);
         }
 
         .sobre-divider {
@@ -774,7 +802,14 @@
             display: flex;
             align-items: flex-start;
             gap: 1rem;
-            font-size: 1rem;
+            font-size: 0.97rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid rgba(194, 177, 159, 0.25);
+        }
+
+        .info-item:last-of-type {
+            border-bottom: none;
+            padding-bottom: 0;
         }
 
         .info-icon {
@@ -782,7 +817,8 @@
             display: flex;
             align-items: center;
             flex-shrink: 0;
-            margin-top: 2px;
+            margin-top: 3px;
+            width: 20px;
         }
 
         .whatsapp-large {
@@ -798,10 +834,10 @@
 
         /* FOOTER */
         footer {
-            background-color: #2A2421;
+            background-color: #2a2421;
             color: var(--bg-color);
-            padding: 4rem 5% 2rem;
-            border-top: 4px solid var(--accent-color);
+            padding: calc(4.5rem + 0.5cm) 5% calc(2.5rem + 0.5cm);
+            border-top: 5px solid #7e5940;
         }
 
         /* FAQ SECTION */
@@ -811,17 +847,36 @@
         }
 
         .faq-container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+            align-items: start;
+        }
+
+        @media (min-width: 768px) {
+            .faq-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.75rem 1.5rem;
+            }
         }
 
         .faq-item {
             background-color: var(--white);
-            border: 1px solid rgba(0,0,0,0.05);
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border: 1px solid rgba(194, 177, 159, 0.25);
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
             overflow: hidden;
+            transition: border-color 0.3s ease;
+        }
+
+        .faq-item.faq-open {
+            border-color: var(--accent-color);
+            border-left: 3px solid var(--accent-color);
         }
 
         .faq-question {
@@ -831,25 +886,31 @@
             background: none;
             border: none;
             font-family: var(--font-heading);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 600;
             color: var(--text-primary);
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background-color 0.3s ease;
+            gap: 1rem;
+            transition: color 0.3s ease;
         }
 
         .faq-question:hover {
-            background-color: #fcfcfc;
+            color: var(--accent-color);
+        }
+
+        .faq-item.faq-open .faq-question {
+            color: var(--accent-color);
         }
 
         .faq-question .icon {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 300;
-            color: var(--primary-color);
+            color: var(--accent-color);
             transition: transform 0.3s ease;
+            flex-shrink: 0;
         }
 
         .faq-item.faq-open .faq-question .icon {
@@ -860,7 +921,6 @@
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease;
-            background-color: #fafafa;
         }
 
         .faq-answer-inner {
@@ -868,15 +928,17 @@
             font-family: var(--font-body);
             color: var(--text-secondary);
             font-size: 0.95rem;
-            line-height: 1.7;
+            line-height: 1.75;
+            border-top: 1px solid rgba(194, 177, 159, 0.2);
         }
 
         /* FOOTER */
+        .footer-content {
             display: flex;
             flex-direction: column;
             gap: 2.5rem;
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .footer-logo-text {
@@ -889,22 +951,23 @@
 
         .footer-logo-title {
             font-family: var(--font-heading);
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--white);
             font-weight: 400;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             line-height: 1;
             transition: color 0.3s ease;
         }
 
         .footer-logo-subtitle {
             font-family: var(--font-body);
-            font-size: 0.75rem;
-            color: #C2B09D;
+            font-size: 0.7rem;
+            color: #A89080;
             text-transform: uppercase;
-            letter-spacing: 2.5px;
+            letter-spacing: 3px;
             font-weight: 500;
             transition: color 0.3s ease;
+            margin-top: 0.3rem;
         }
         
         .footer-logo-text:hover .footer-logo-title,
@@ -913,9 +976,10 @@
         }
 
         .footer-info {
-            font-size: 0.9rem;
-            color: #C2B09D;
-            line-height: 1.8;
+            font-size: 0.82rem;
+            color: #A89080;
+            line-height: 1.9;
+            letter-spacing: 0.3px;
         }
 
         .footer-nav {
@@ -925,11 +989,12 @@
         }
 
         .footer-nav a {
-            color: #C2B09D;
-            font-size: 0.82rem;
+            color: #A89080;
+            font-size: 0.78rem;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             font-weight: 500;
+            transition: color 0.3s ease;
         }
 
         .footer-nav a:hover {
@@ -938,10 +1003,11 @@
 
         .footer-bottom {
             text-align: center;
-            border-top: 1px solid rgba(194, 177, 159, 0.15);
-            padding-top: 2rem;
-            font-size: 0.78rem;
-            color: #666;
+            border-top: 1px solid rgba(194, 177, 159, 0.12);
+            padding-top: 1.25rem;
+            font-size: 0.72rem;
+            color: rgba(194, 177, 159, 0.4);
+            letter-spacing: 0.5px;
         }
 
         /* DESKTOP MEDIA QUERIES */
@@ -1004,11 +1070,11 @@
 
             .footer-content {
                 gap: 3rem;
-                margin-bottom: 4rem;
+                margin-bottom: 2.5rem;
             }
 
             footer {
-                padding: 5rem 5% 2rem;
+                padding: 3.5rem 5% 1.5rem;
             }
 
             .hero-buttons {
@@ -1182,11 +1248,11 @@
             <img src="logo.png" alt="Danilo Rocco Advogados Associados" class="logo-img">
         </a>
 
-        <div class="hamburger" role="button" aria-label="Abrir menu" aria-expanded="false" tabindex="0" onclick="toggleMenu()" onkeypress="if(event.key === 'Enter') toggleMenu()">
+        <button type="button" class="hamburger" aria-label="Abrir menu" aria-expanded="false" onclick="toggleMenu()">
             <div class="line1"></div>
             <div class="line2"></div>
             <div class="line3"></div>
-        </div>
+        </button>
 
         <ul class="nav-links">
             <li><a href="#atuacao" onclick="toggleMenu()">Áreas de Atuação</a></li>
@@ -1242,59 +1308,61 @@
 
     <section id="faq" class="faq-section reveal">
         <div class="faq-container">
-            <h2 class="section-title" style="text-align: center;">Perguntas Frequentes</h2>
-            <p class="section-subtitle" style="text-align: center; margin-bottom: 3rem;">Respostas claras para as dúvidas mais comuns dos nossos clientes.</p>
+            <h2 class="section-title text-center">Perguntas Frequentes</h2>
+            <p class="section-subtitle text-center">Respostas claras para as dúvidas mais comuns dos nossos clientes.</p>
 
+            <div class="faq-grid">
             <div class="faq-item reveal delay-1">
-                <button class="faq-question">Assinei um contrato e a outra parte não cumpriu. O que faço?<span class="icon">+</span></button>
+                <button type="button" class="faq-question">Assinei um contrato e a outra parte não cumpriu. O que faço?<span class="icon">+</span></button>
                 <div class="faq-answer"><div class="faq-answer-inner">Descumprir contrato tem nome jurídico — inadimplemento — e consequências reais. Você pode exigir na Justiça que a obrigação seja cumprida, ou pode desistir do negócio e pedir indenização pelo prejuízo que teve. As duas opções existem, e qual seguir depende do caso. O que não dá é esperar: quanto mais tempo passa, menos recursos jurídicos ficam disponíveis. Uma conversa com um advogado logo no início muda bastante o que é possível fazer.</div></div>
             </div>
             <div class="faq-item reveal delay-2">
-                <button class="faq-question">Uma empresa me deve dinheiro e não paga. Como recebo?<span class="icon">+</span></button>
+                <button type="button" class="faq-question">Uma empresa me deve dinheiro e não paga. Como recebo?<span class="icon">+</span></button>
                 <div class="faq-answer"><div class="faq-answer-inner">Depende do que você tem em mãos. Com contrato, nota fiscal ou qualquer documento que comprove a dívida, já dá para agir — às vezes só uma notificação formal resolve, sem precisar de processo. Se não resolver, dá para ajuizar cobrança ou execução, e em alguns casos pedir bloqueio de bens do devedor enquanto o processo corre. O problema maior é esperar demais: dívida tem prazo para ser cobrada. Depois que prescreve, não tem mais o que fazer.</div></div>
             </div>
 
             <div class="faq-item reveal delay-1">
-                <button class="faq-question">Meu familiar faleceu e deixou dívidas. Sou obrigado a pagar?<span class="icon">+</span></button>
+                <button type="button" class="faq-question">Meu familiar faleceu e deixou dívidas. Sou obrigado a pagar?<span class="icon">+</span></button>
                 <div class="faq-answer"><div class="faq-answer-inner">Não. Herdeiro não herda dívida no bolso — herda só até o limite do que o falecido deixou de bens. Se as dívidas forem maiores que o patrimônio, o que sobrar simplesmente não existe para dividir, e ninguém paga nada do próprio dinheiro. O que acontece na prática é que as dívidas consomem o patrimônio antes de qualquer partilha. Por isso, antes de aceitar qualquer herança, vale muito entender o tamanho real do que ficou — tanto bens quanto dívidas.</div></div>
             </div>
             <div class="faq-item reveal delay-2">
-                <button class="faq-question">Como funciona o inventário? Preciso de advogado?<span class="icon">+</span></button>
+                <button type="button" class="faq-question">Como funciona o inventário? Preciso de advogado?<span class="icon">+</span></button>
                 <div class="faq-answer"><div class="faq-answer-inner">O inventário é o processo que transfere os bens do falecido para os herdeiros. Ele pode ser feito em cartório — quando todos os herdeiros são maiores, estão de acordo e não há testamento — ou na Justiça, quando há menor de idade, incapaz ou qualquer conflito entre as partes. Nos dois casos, a lei exige advogado. Abrir logo é importante: passados 60 dias do falecimento, começa a correr multa. Quanto mais tempo demora, mais caro fica e mais complicado tende a ficar.</div></div>
             </div>
 
             <div class="faq-item reveal delay-1">
-                <button class="faq-question">Um ex-funcionário entrou com reclamação trabalhista. O que acontece agora?<span class="icon">+</span></button>
+                <button type="button" class="faq-question">Um ex-funcionário entrou com reclamação trabalhista. O que acontece agora?<span class="icon">+</span></button>
                 <div class="faq-answer"><div class="faq-answer-inner">A empresa vai ser notificada para comparecer a uma audiência e apresentar defesa — a contestação. Ignorar não é opção: quem não responde no prazo pode ter os pedidos do reclamante aceitos automaticamente. O primeiro passo é levar a notificação para um advogado analisar o que está sendo pedido, o que tem fundamento e o que não tem. Resposta mal feita pode transformar uma reclamação pequena num problema grande. Quanto antes você agir, mais margem tem para construir uma boa defesa.</div></div>
             </div>
             <div class="faq-item reveal delay-2">
-                <button class="faq-question">Qual o prazo para pagar a rescisão depois que demiti alguém?<span class="icon">+</span></button>
+                <button type="button" class="faq-question">Qual o prazo para pagar a rescisão depois que demiti alguém?<span class="icon">+</span></button>
                 <div class="faq-answer"><div class="faq-answer-inner">Dez dias corridos após o fim do contrato. Nesse prazo, a empresa precisa pagar tudo e entregar os documentos — Termo de Rescisão, guias do FGTS e do seguro-desemprego. Atrasou? A lei prevê multa de um salário do empregado, fora juros e correção. É um dos erros mais comuns em empresas menores e uma das principais razões pelas quais reclamações trabalhistas aparecem. O cálculo errado das verbas entra na mesma conta.</div></div>
             </div>
 
             <div class="faq-item reveal delay-1">
-                <button class="faq-question">Minha família usa essa terra há décadas, mas não temos escritura. Isso pode ser um problema?<span class="icon">+</span></button>
+                <button type="button" class="faq-question">Minha família usa essa terra há décadas, mas não temos escritura. Isso pode ser um problema?<span class="icon">+</span></button>
                 <div class="faq-answer"><div class="faq-answer-inner">Pode, e dos sérios. Sem documento, a terra fica vulnerável: alguém pode disputar a posse, o banco não financia, venda não tem como fazer. Na prática, muita família do campo vive nessa situação sem saber o risco que corre. Existe um caminho jurídico para resolver isso — a usucapião rural — que reconhece a propriedade de quem usa a terra de forma contínua e pacífica pelo tempo que a lei exige, mesmo sem escritura. O ponto de partida é entender a situação específica da área com um advogado.</div></div>
             </div>
             <div class="faq-item reveal delay-2">
-                <button class="faq-question">Tenho contrato de parceria com a usina e quero minha terra de volta. Como faço?<span class="icon">+</span></button>
+                <button type="button" class="faq-question">Tenho contrato de parceria com a usina e quero minha terra de volta. Como faço?<span class="icon">+</span></button>
                 <div class="faq-answer"><div class="faq-answer-inner">Primeiro, é preciso ler o contrato com cuidado — especialmente as cláusulas de prazo e de corte adicional. Muita usina inclui no contrato o direito de fazer um ou dois cortes a mais depois do prazo original, o que empurra a devolução para frente sem que o produtor perceba. Se o prazo já passou e a usina não devolve, há caminho jurídico para exigir a reintegração da área. Mas o processo depende muito do que está escrito no contrato. Sem ler o documento, não dá para saber o que você pode exigir e quando.</div></div>
             </div>
             <div class="faq-item reveal delay-3">
-                <button class="faq-question">A usina atrasou o pagamento da minha cana. O que posso fazer?<span class="icon">+</span></button>
+                <button type="button" class="faq-question">A usina atrasou o pagamento da minha cana. O que posso fazer?<span class="icon">+</span></button>
                 <div class="faq-answer"><div class="faq-answer-inner">Atraso de pagamento acontece mais do que deveria na região, e muitos produtores engolem sem reclamar por medo de perder o contrato. Mas existe direito. Com o atraso documentado, dá para notificar formalmente a usina exigindo pagamento com juros e correção. Se não resolver, o caminho é judicial. Em casos onde a usina deve para vários fornecedores ao mesmo tempo, há ainda a possibilidade de discutir a suspensão do fornecimento como pressão legítima. O essencial é não ficar quieto: documente tudo desde o primeiro atraso.</div></div>
             </div>
             <div class="faq-item reveal delay-1">
-                <button class="faq-question">A COPEL passou linha de transmissão na minha terra e nunca me pagou. Tenho direito a receber?<span class="icon">+</span></button>
+                <button type="button" class="faq-question">A COPEL passou linha de transmissão na minha terra e nunca me pagou. Tenho direito a receber?<span class="icon">+</span></button>
                 <div class="faq-answer"><div class="faq-answer-inner">Tem. Quando uma concessionária de energia instala torres ou cabos em propriedade particular, ela está impondo uma restrição ao uso daquela área — e isso gera obrigação de indenizar. Muitos produtores da região não sabem disso e simplesmente convivem com a linha sem receber nada. O detalhe importante: mesmo que a instalação tenha sido feita há anos, ainda é possível buscar indenização judicialmente, dependendo do prazo prescricional de cada caso. Vale verificar antes de concluir que o direito já expirou.</div></div>
             </div>
             <div class="faq-item reveal delay-2">
-                <button class="faq-question">A COPEL me ofereceu um valor de indenização. Sou obrigado a aceitar?<span class="icon">+</span></button>
+                <button type="button" class="faq-question">A COPEL me ofereceu um valor de indenização. Sou obrigado a aceitar?<span class="icon">+</span></button>
                 <div class="faq-answer"><div class="faq-answer-inner">Não. O valor que a COPEL oferece administrativamente costuma ser calculado com critérios padronizados que não consideram a realidade da sua propriedade — produtividade, localização, quanto aquela faixa representa para a sua operação. A Justiça reconhece que a indenização deve corresponder ao prejuízo real, apurado por perícia. A diferença entre o que a empresa oferece e o que um perito calcula pode ser considerável. Antes de assinar qualquer coisa, vale muito uma consulta jurídica.</div></div>
             </div>
             <div class="faq-item reveal delay-3">
-                <button class="faq-question">Assinei um acordo com a COPEL há anos por um valor que hoje parece baixo. Ainda posso questionar?<span class="icon">+</span></button>
+                <button type="button" class="faq-question">Assinei um acordo com a COPEL há anos por um valor que hoje parece baixo. Ainda posso questionar?<span class="icon">+</span></button>
                 <div class="faq-answer"><div class="faq-answer-inner">Depende de como esse acordo foi feito. Se o produtor assinou sem entender direito o que estava aceitando, se a avaliação ignorou parte dos danos, ou se surgiram prejuízos novos que não estavam no acordo original — existem argumentos jurídicos para buscar complementação. Não é garantido, mas também não é automático que o acordo fecha tudo para sempre. O prazo é o ponto mais crítico: deixar para depois pode eliminar as possibilidades. Uma consulta serve exatamente para saber se ainda há o que fazer no seu caso.</div></div>
+            </div>
             </div>
         </div>
     </section>
@@ -1330,7 +1398,7 @@
                     <span class="stat-label">anos de experiência</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number counter" data-target="2003">0</span>
+                    <span class="stat-number"><span class="counter" data-target="2003">0</span></span>
                     <span class="stat-label">início na advocacia</span>
                 </div>
                 <div class="stat-item">
@@ -1443,9 +1511,10 @@
 
         document.addEventListener('click', function(event) {
             const header = document.querySelector('header');
-            const hamburger = document.querySelector('.hamburger');
-            if (header.classList.contains('nav-active') && !header.contains(event.target) && event.target !== hamburger) {
+            if (header && header.classList.contains('nav-active') && !header.contains(event.target)) {
                 header.classList.remove('nav-active');
+                const hamburger = header.querySelector('.hamburger');
+                if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
             }
         });
 
@@ -1467,20 +1536,25 @@
             });
         });
 
+        const header = document.querySelector('header');
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+
         window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            const scrollTopBtn = document.getElementById('scrollTopBtn');
-
-            header.style.boxShadow = window.scrollY > 10
-                ? '0 4px 20px rgba(0,0,0,0.08)'
-                : 'none';
-
-            scrollTopBtn.classList.toggle('show', window.scrollY > 500);
+            if (header) {
+                header.style.boxShadow = window.scrollY > 10
+                    ? '0 4px 20px rgba(0,0,0,0.08)'
+                    : 'none';
+            }
+            if (scrollTopBtn) {
+                scrollTopBtn.classList.toggle('show', window.scrollY > 500);
+            }
         });
 
-        document.getElementById('scrollTopBtn').addEventListener('click', function() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        if (scrollTopBtn) {
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
 
         // Active nav link on scroll
         const sections = document.querySelectorAll('section[id]');
